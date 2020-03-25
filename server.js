@@ -18,6 +18,21 @@ app.use(express.static("public"));
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/trainerdb", {
 useNewUrlParser: true });
 
+app.get("/exercise", (req, res) => {
+    res.send("exercise")
+})
+
+app.get("/api/workouts", (req, res) => {
+    db.Workout.find({})
+        .then(dbWorkout => {
+            res.json(dbWorkout)
+        })
+});
+
+app.post("/api/workouts", (req, res) => {
+    db.Workout.create()
+})
+
 app.listen(PORT, () => {
     console.log("listening... PORT: " + PORT)
 });
