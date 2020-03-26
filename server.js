@@ -27,6 +27,7 @@ app.get("/stats", (req, res) => {
 })
 
 // api routes
+// Gets the last workout
 app.get("/api/workouts", (req, res) => {
     db.Workout.find({})
         .then(dbWorkout => {
@@ -34,6 +35,7 @@ app.get("/api/workouts", (req, res) => {
         })
 });
 
+// Adds an exercise
 app.post("/api/workouts", (req, res) => {
     db.Workout.create(req.body)
         .then(dbWorkout => {
@@ -41,6 +43,7 @@ app.post("/api/workouts", (req, res) => {
         })
 })
 
+// Creates a workout
 app.put("/api/workouts/:id", (req, res) => {
     db.Workout.findByIdAndUpdate(req.params.id, { $push: { exercises: req.body } })
         .then(dbUser => {
@@ -48,8 +51,9 @@ app.put("/api/workouts/:id", (req, res) => {
         })
 });
 
+// Gets all workouts
 app.get("/api/workouts/range", (req, res) => {
-    db.Workout.find({})
+    db.Workout.find({}).sort("-day").limit(7)
     .then(dbUser => {
         res.json(dbUser);
       })
