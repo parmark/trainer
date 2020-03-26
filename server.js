@@ -22,6 +22,10 @@ app.get("/exercise", (req, res) => {
     res.sendfile("./public/exercise.html")
 }) 
 
+app.get("/stats", (req, res) => {
+    res.sendfile("./public/stats.html")
+})
+
 app.get("/api/workouts", (req, res) => {
     db.Workout.find({})
         .then(dbWorkout => {
