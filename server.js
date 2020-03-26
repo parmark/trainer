@@ -15,7 +15,9 @@ app.use(express.json());
 
 app.use(express.static("public/"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/trainerdb");
+var MONGOD_URI = process.env.MONGODB_URI || "mongodb://localhost/trainerdb"
+
+mongoose.connect(MONGOD_URI);
 
 // html routes
 app.get("/exercise", (req, res) => {
